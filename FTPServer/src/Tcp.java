@@ -1,34 +1,95 @@
 import java.io.BufferedReader;
-import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.net.InetAddress;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
-public class Tcp {
-	 final static int port = 9632;
 
-	public static void main(String[] args) {
+public class Tcp 
+{
+	
+
+	public static void main(String[] args) throws IOException 
+	{
+		// création d’un socket serveur sur le port port
+		try
+		{
+			// création d’un socket serveur sur le port port
+			ServerSocket serveurSocket = new ServerSocket(1280);
+			System.out.println("Lancement du serveur");
+
+			while(true)
+			{
+			Socket clientServiceSocket = serveurSocket.accept();
 		
-
-		    Socket socket;
-		    DataInputStream userInput;
-		    PrintStream theOutputStream;
-
-		    try {
-		      InetAddress serveur = InetAddress.getByName(args[0]);
-		      socket = new Socket(serveur, port);
-
-		      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		      PrintStream out = new PrintStream(socket.getOutputStream());
-
-		      out.println(args[1]);
-		      System.out.println(in.readLine());
-
-		    } catch (Exception e) {
+			}
+		}
+			catch (Exception e) 
+		 	{
 		      e.printStackTrace();
 		    }
-		  
+		
+		
+		
+	
 	}
+}
+		
+		/*
+		 final ServerSocket serveurSocket  ;
+	     final Socket clientSocket ;
+	     final BufferedReader in;
+	     final PrintWriter out;
+	     final Scanner sc=new Scanner(System.in);
+	  
+	     try {
+	       serveurSocket = new ServerSocket(5000);
+	       clientSocket = serveurSocket.accept();
+	       out = new PrintWriter(clientSocket.getOutputStream());
+	       in = new BufferedReader (new InputStreamReader (clientSocket.getInputStream()));
+	       Thread envoi= new Thread(new Runnable() {
+	          String msg;
+	          @Override
+	          public void run() {
+	             while(true){
+	                msg = sc.nextLine();
+	                out.println(msg);
+	                out.flush();
+	             }
+	          }
+	       });
+	       envoi.start();
+	   
+	       Thread recevoir= new Thread(new Runnable() {
+	          String msg ;
+	          @Override
+	          public void run() {
+	             try {
+	                msg = in.readLine();
+	                //tant que le client est connecté
+	                while(msg!=null){
+	                   System.out.println("Client : "+msg);
+	                   msg = in.readLine();
+	                }
+	                //sortir de la boucle si le client a déconecté
+	                System.out.println("Client déconecté");
+	                //fermer le flux et la session socket
+	                out.close();
+	                clientSocket.close();
+	                serveurSocket.close();
+	             } catch (IOException e) {
+	                  e.printStackTrace();
+	             }
+	         }
+	      });
+	      recevoir.start();
+	      }catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	   }
+	
 
 }
+*/
