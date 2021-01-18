@@ -17,8 +17,8 @@ public class TCPConnexion {
 	
 
 	  final static int port = 8001;
-	  final static String login = "root";
-	  final static String mdp ="root";
+	  final static String login = "user";
+	  final static String mdp ="pass";
 
 
 
