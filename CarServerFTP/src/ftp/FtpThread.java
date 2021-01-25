@@ -2,6 +2,8 @@ package ftp;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,8 +24,12 @@ public class FtpThread extends Thread {
 	private DataOutputStream dataOut;
 	private PrintStream output;
 	private BufferedReader buffRead;
+	private BufferedReader buffRead1;
 	private int port;
-	private String currentDir; 
+	private String currentDir;
+	private String ROOT;
+	private File directory;
+	private Mode mode;
 
 	
 	public FtpThread(Socket s, ServerSocket server, int p){
@@ -70,6 +76,7 @@ public class FtpThread extends Thread {
 		}
 	}
 	
+
 	/**
 	 * Check request receive and treat them
 	 * @param request cmd and arguments
@@ -91,11 +98,14 @@ public class FtpThread extends Thread {
 		case "PASS":
 			res =this.Pass(data[1]);
 			break;
-		case "DIR":
-			this.dir(data[1]);			
+		case "LIST":
+			this.LIST();			
 			break;
 		case "PWD":
 			res = this.PWD();
+			break;
+		case "CWD":
+			this.CWD(data[1]);
 			break;
 		case "RETR":
 			res =this.RETR(data[1]);
@@ -169,10 +179,7 @@ public class FtpThread extends Thread {
 	}
 	
 	
-	
 
-	
-	
 	/**
 	 * Quit ftp server
 	 * @param data
@@ -192,33 +199,73 @@ public class FtpThread extends Thread {
 		return "257 " +this.currentDir;
 	}
 	
+	
 	/**
-	 * Get a list of the given directory
-	 * @param data  path to the directory to list
+	 * change current directory
+	 * @param data
+	 * @return
+	 */
+	public String	CWD(String directory){
+		File chemin = new File(directory).getAbsoluteFile();
+		if(chemin.exists()){
+			
+			boolean res = (System.setProperty("user.dir", chemin.getAbsolutePath())!=null);
+			
+			if(!res)
+			{
+				return "500 ERROR";
+			}
+			this.currentDir = directory;
+			return  "200 directory changed";
+		}
+		else{
+
+			return "431 directory not exist ";
+		}
+	}
+		
+	
+	
+
+
+	
+	/**
+	 * DIR method. Get a list of the given directory
+	 * 
 	 * @throws IOException 
 	 */
-	public void dir(String path) throws IOException
-	{
-		if (sock.isClosed() || sock== null) {
+	private void LIST() throws IOException {
+		
+		// check connection
+		if(sock.isClosed() || sock==null) {
 			try {
 				this.server = new ServerSocket(port);
 				this.sock = this.server.accept();
-				this.output = new PrintStream(this.sock.getOutputStream());
-				this.dataOut = new DataOutputStream(output);
+				this.dataOut = new DataOutputStream(this.sock.getOutputStream());
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
-		String filename = this.currentDir;
-		if (path != null)
-        {
-            filename = filename + "/" + path;
-        }
-
-
 		
+		this.dataOut.writeBytes("150  open data connection."+ "\r\n");
+				
+		String filename = this.currentDir;
+		// ouverture de socket
+		if (mode == Mode.PASSIF) {
+				this.sock = this.server.accept();
+		} else {
+			this.sock = new Socket(sock.getInetAddress(), port);
+		}
+        
 	}
 	
+	
+
+
+	
+
+
+
 	
 
 }
