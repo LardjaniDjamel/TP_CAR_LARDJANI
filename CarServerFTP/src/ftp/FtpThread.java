@@ -18,7 +18,10 @@ public class FtpThread extends Thread {
 	private Socket sock;
 	private ServerSocket server; 
 	private String pass = "pass"; 
+	private String user = "djamel";
 	private DataOutputStream dataOut;
+	private PrintStream output;
+	private BufferedReader buffRead;
 	private int port;
 	private String currentDir; 
 
@@ -33,8 +36,8 @@ public class FtpThread extends Thread {
 		try {
 
 			// Input from client
-			BufferedReader buffRead = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));
-			PrintStream output = new PrintStream(this.sock.getOutputStream());
+			this.buffRead = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));
+			this.output = new PrintStream(this.sock.getOutputStream());
 			
 			// Output to client
 			this.dataOut = new DataOutputStream(output);
@@ -88,6 +91,14 @@ public class FtpThread extends Thread {
 			res =this.Pass(data[1]);
 		}
 		
+        else if(cmd.equals("DIR")){
+        	this.dir(data[1]);
+		}
+        else if(cmd.equals("PWD")){
+			res = this.PWD();
+		}
+		
+		
 		else if(cmd.equals("QUIT")){
 
 			res =this.Quit(data[0]);
@@ -107,7 +118,11 @@ public class FtpThread extends Thread {
 	 */
 	
 	public String User(String data){
-		return "331 " + data; 
+	
+		if(data.equals(this.user)){
+			return("331 User name success, please put your password");
+		}
+		return "500 Wrong user/password";
 		
 	} 	
 	
@@ -135,6 +150,44 @@ public class FtpThread extends Thread {
 		return "221 QUIT"; 
 	}
 	
+	
+	/**
+	 * check the value of the current directory
+	 * @return
+	 */
+	public String PWD(){
+		
+		return "257 " +this.currentDir;
+	}
+	
+	/**
+	 * Get a list of the given directory
+	 * @param data  path to the directory to list
+	 * @throws IOException 
+	 */
+	public void dir(String path) throws IOException
+	{
+		if (sock.isClosed() || sock== null) {
+			try {
+				this.server = new ServerSocket(port);
+				this.sock = this.server.accept();
+				this.output = new PrintStream(this.sock.getOutputStream());
+				this.dataOut = new DataOutputStream(output);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		String filename = this.currentDir;
+		if (path != null)
+        {
+            filename = filename + "/" + path;
+        }
+
+
+	}
+	
+	
+
 
 	
 
