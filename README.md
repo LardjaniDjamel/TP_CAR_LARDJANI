@@ -1,15 +1,15 @@
 # CAR
 
-##Auteur:
+##Author:
  
 **Lardjani Djamel**
 
-## Introduction du TP:
+## Introduction of the TP::
 
 Serveur FTP
-Le but de ce TP est d'écrire un programme serveur FTP. Ce serveur FTP doit pouvoir être utilisé par le client ftp en ligne de commande .
+The goal of this lab is to write an FTP server program. This FTP server must be able to be used by the command line ftp client.
 
-## Les commande implémenté :
+## The implemented commands:
 USER
 PASS
 QUIT
