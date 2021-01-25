@@ -80,35 +80,44 @@ public class FtpThread extends Thread {
 		String[] data = request.split(" ");
 		String res ="";
 		String cmd = data[0];
-		
-		if(cmd.equals("USER")){
+		switch (cmd) {
+		case "USER":
 			for(String d : data){
 				System.out.println("Data " + d);
 			}
 			res = this.User(data[1]);
-        }
-        else if(cmd.equals("PASS")){
+		
+			break;
+		case "PASS":
 			res =this.Pass(data[1]);
-		}
-		
-        else if(cmd.equals("DIR")){
-        	this.dir(data[1]);
-		}
-        else if(cmd.equals("PWD")){
+			break;
+		case "DIR":
+			this.dir(data[1]);			
+			break;
+		case "PWD":
 			res = this.PWD();
-		}
-		
-		
-		else if(cmd.equals("QUIT")){
-
+			break;
+		case "RETR":
+			res =this.RETR(data[1]);
+			break;
+		case "STOR":
+			res =this.STOR(data[1]);
+			break;
+		case "QUIT":
 			res =this.Quit(data[0]);
+			break;
+
+		default:
+			res = "500 Syntax error ";
 		}
 		
-		else{
-			res = "500 Wrong command";
-		}
-		return res;
+		return res ;
+		
 	}
+		
+
+       
+       
 	
 
 	/**
@@ -137,6 +146,29 @@ public class FtpThread extends Thread {
 		}
 		return "500 Wrong user/password";
 	}
+	
+	
+	/**
+	 * transfer a copy of the file, specified in the pathname
+	 * @param copy 
+	 * @return
+	 */
+	public String RETR(String copy){
+		return "202 copied";
+	}
+	
+	
+	/**
+	 * accept the data transferred via the data connection and to store the data as
+     * 	a file at the server site
+	 * @param copy
+	 * @return
+	 */
+	public String STOR(String data){
+		return "202 stored";
+	}
+	
+	
 	
 
 	
@@ -184,11 +216,9 @@ public class FtpThread extends Thread {
         }
 
 
+		
 	}
 	
-	
-
-
 	
 
 }
