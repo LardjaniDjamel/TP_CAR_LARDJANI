@@ -6,16 +6,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.shop.entities.Client;
 import com.example.shop.entities.Produit;
 import com.example.shop.repository.ClientRepo;
+import com.example.shop.repository.LigneCommandeRepo;
 import com.example.shop.service.Impl.ProduitServiceImpl;
 
 
@@ -28,11 +30,12 @@ public class ClientController {
 	
 	@Autowired
 	ProduitServiceImpl produit  ;
-	
+
 
 	@GetMapping("/login")
 	@ResponseBody
-	public ModelAndView login(ModelMap pModel) {//		
+	public ModelAndView login(Model model) {//
+		//model.addAttribute("client", new Client());
 		ModelAndView mav = new ModelAndView("login");
         return mav;
 	}
@@ -41,7 +44,7 @@ public class ClientController {
 	@PostMapping("/login")
 	@ResponseBody
 	public ModelAndView loginIn(@RequestParam(value = "email") String
-			email,@RequestParam(value = "password") String pass) {
+			email,@RequestParam(value = "password") String pass, Model model, WebRequest request) {
 		
 		List<Client> liste=new ArrayList<Client>();
 		ModelAndView mav = null;
@@ -52,9 +55,12 @@ public class ClientController {
 		
 		for( Client c : liste ) {
 			if (((c.getEmail()).equals(email)) && (c.getMotDePasse()).equals(pass)) {
-				
+				request.setAttribute("connected", true, WebRequest.SCOPE_SESSION);
+				request.setAttribute("client", c, WebRequest.SCOPE_SESSION);
+
 				mav = new ModelAndView("test");
 				mav.addObject("liste",list);
+				
 			}
 			else {
 				mav = new ModelAndView("login");
@@ -65,6 +71,23 @@ public class ClientController {
 		}
         return mav;
 	}
+	
+	
+	@GetMapping("/logout")
+	@ResponseBody
+	public ModelAndView loginOut(Model model, WebRequest request) {
+		
+		request.setAttribute("connected", false, WebRequest.SCOPE_SESSION);
+		request.removeAttribute("client", WebRequest.SCOPE_SESSION);
+		List<Produit> list = new ArrayList<Produit>();
+		list=produit.getAllProduit();
+		ModelAndView mav;
+		mav = new ModelAndView("test");
+		mav.addObject("liste",list);
+        return mav;
+	}
+	
+	
 	
 	@GetMapping(value = "/addPerson")
 	public ModelAndView addPerson() 
@@ -90,12 +113,7 @@ public class ClientController {
 		
 	}
 	
-	@GetMapping(value = "/cart")
-	public ModelAndView cart() 
-	{
-		ModelAndView mav = new ModelAndView("cart");
-		return mav;
-	}
+
 	
 	
 	

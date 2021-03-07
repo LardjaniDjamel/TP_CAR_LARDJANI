@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,36 +14,33 @@ import javax.persistence.Table;
 @Table(name="ligneCommande")
 public class LigneCommande implements Serializable 
 {
-	@Id
-	private int id_commande;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idLigne;
+	
+	
+	private int ic_client;
 	private int id_produit;
 	private int quantite;
 	private float prixTotal;
 	
+	public LigneCommande() 
+	{
+		super();	
+	}
 
 	
 	
-	public LigneCommande(int idc,int idp,int quantite,float prix) 
+	public LigneCommande(int idp,int idc,int quantite,float prix) 
 	{
-		
-		this.id_commande=idc;
+		this.ic_client=idc;
 		this.id_produit=idp;
 		this.prixTotal=prix;
 		this.quantite=quantite;
 		
 	}
 
-
-	public int getId_commande() {
-		return id_commande;
-	}
-
-
-	public void setId_commande(int id_commande) {
-		this.id_commande = id_commande;
-	}
 
 
 	public int getId_produit() {

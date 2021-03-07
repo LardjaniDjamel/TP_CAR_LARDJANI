@@ -52,7 +52,8 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.html"><img src="images/logo.png" alt="#"></a>
+                                    <a href="index.html"><img src="images/logo.png" alt="#">  </a>
+                                    <h1> WELCOME ${client.getNom()} </h1>
                                 </div>
                             </div>
                         </div>
@@ -63,12 +64,25 @@
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
                                         <li class="active"  > <a href="index.html">Home</a> </li>
-                                        <li> <a href="login">Log in</a> </li>
-                                        <li> <a href="cart" > Cart</a> </li>
-                               
+                                        
+                                        <c:choose>
+									         <c:when test = "${client.getNom() != null}" >
+											  <li> <a href="logout">Log out</a> </li>	
+											  <li> <a href="cart" > Cart</a> </li>								         
+											</c:when>
+									         
+									         <c:otherwise>
+												<li> <a href="login">Log in</a> </li>										         
+											</c:otherwise>
+									      </c:choose>
+                                        
+                                    
+										                                           
+                                        
+                                        
                                         
                                     </ul>
-                                    
+                                        
                                 </nav>
                             </div>
                         </div>
@@ -166,7 +180,18 @@
 	                            <img src="images/${prod.getImage()}" alt="img" />
 	                            <h3><strong class="red">${prod. getPrice()}</strong>  $</h3>
 	                            <span>${prod.getName()}</span>
-	                             <button type="button" class="btn btn-success">Ajouter au panier</button>
+	                            
+	                             <c:choose>
+									         <c:when test = "${client.getNom() != null}" >
+											  <form action="/cart/${prod.getIdProduit()}/${client.getId_client()}"> 
+	                             	<button type="submit" class="btn btn-success" value="id">Ajouter au panier</button>
+	                             </form>							         
+											</c:when>
+									         
+									         <c:otherwise>
+											</c:otherwise>
+									      </c:choose>
+	                           
 	                            
 	                        </div>
 	                    </div>
