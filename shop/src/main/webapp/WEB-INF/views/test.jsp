@@ -63,8 +63,9 @@
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
                                         <li class="active"  > <a href="index.html">Home</a> </li>
-                                        <li> <a href="about.html" class="fa fa-shopping-cart" > Mon panier</a> </li>
-                                        <li> <a href="login.xml">Se conecter</a> </li>
+                                        <li> <a href="login">Log in</a> </li>
+                                        <li> <a href="cart" > Cart</a> </li>
+                               
                                         
                                     </ul>
                                     
@@ -89,7 +90,7 @@
                             <h1>up to 25% Flat Sale</h1>
                             <p>It is a long established fact that a reader will be distracted by the readable content
                                 <br> of a page when looking at its layout. The point of using Lorem Ipsum is that</p>
-                            <a class="buynow" href="#">Buy Now</a>
+              
                             <ul class="social_icon">
                                 <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
                                 <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -99,7 +100,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="second-slide" src="images/Dell.jpg" alt="Second slide">
+                    <img class="second-slide" src="images/pc.jpg" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption relative">
                             <span>All New Phones </span>
@@ -117,14 +118,13 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="third-slide" src="images/Dell.jpg" alt="Third slide">
+                    <img class="third-slide" src="images/pc.jpg" alt="Third slide">
                     <div class="container">
                         <div class="carousel-caption relative">
                             <span>All New Phones </span>
                             <h1>up to 25% Flat Sale</h1>
                             <p>It is a long established fact that a reader will be distracted by the readable content
                                 <br> of a page when looking at its layout. The point of using Lorem Ipsum is that</p>
-                            <a class="buynow" href="#">Buy Now</a>
                             <ul class="social_icon">
                                 <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
                                 <li> <a href="#"><i class="fa fa-twitter"></i></a></li>

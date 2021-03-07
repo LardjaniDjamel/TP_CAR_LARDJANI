@@ -28,7 +28,8 @@
 
 <body>
 
-    
+	
+  
   <div class="content">
     <div class="container">
       <div class="row justify-content-center">
@@ -40,18 +41,18 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="mb-4">
-                  <h3>Sign In to <strong>Colorlib</strong></h3>
-                  <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
+                  <h3>Sign In to </h3>
+                  
                 </div>
-                <form action="#" method="post">
+                <form action="login" method="post">
                   <div class="form-group first">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username">
+                    <input type="text" class="form-control" id="username" name="email">
 
                   </div>
                   <div class="form-group last mb-4">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password">
+                    <input type="password" class="form-control" id="password" name="password">
                     
                   </div>
                   
@@ -60,7 +61,8 @@
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+                   	<span class="ml-auto"><a href="addPerson" class="forgot-pass">sign up </a></span> 
+                    
                   </div>
 
                   <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">

@@ -21,41 +21,42 @@ public class ProduitController {
 	@Autowired
 	ProduitServiceImpl produit  ;
 	
-	@GetMapping("/login")
+	@GetMapping("/test")
 	@ResponseBody
+	public ModelAndView test(ModelMap pModel) {
 
-	public ModelAndView index(ModelMap pModel) {
-		List<Produit> liste = new ArrayList<Produit>();
-//		Client t = Crepo.findAll();
-		
-		//Client c = new Client(4,"djamel" ,"lard","1 rue","s@gmail","0566","sgdh");
-		//Crepo.save(c);
-		liste=produit.getAllProduit();
-		//Produit p =produit.getById(2);
-		//System.out.println(p.getIdProduit());
-		//Produit p= new Produit (1, "hp", 650, 4, "Gamer", "hp.png");
-		//produit.saveProduit(p);
-		ModelAndView mav = new ModelAndView("test");
-		mav.addObject("liste",liste);
-		//pModel.addAttribute("liste", liste);
+		ModelAndView mav = new ModelAndView("cart");
+	
         return mav;
 	}
 	
-	@GetMapping("/login")
+	
+
+	
+	@GetMapping("/")
 	@ResponseBody
-	public ModelAndView login(ModelMap pModel) {
+	public ModelAndView index(ModelMap pModel) {
 		List<Produit> liste = new ArrayList<Produit>();
-//		
+
 		liste=produit.getAllProduit();
-		//Produit p =produit.getById(2);
-		//System.out.println(p.getIdProduit());
-		//Produit p= new Produit (1, "hp", 650, 4, "Gamer", "hp.png");
-		//produit.saveProduit(p);
-		ModelAndView mav = new ModelAndView("login");
+	
+		ModelAndView mav = new ModelAndView("test");
 		mav.addObject("liste",liste);
-		//pModel.addAttribute("liste", liste);
         return mav;
 	}
+	
+
+	
+	@GetMapping("/product")
+	@ResponseBody
+	public ModelAndView prod(ModelMap pModel) {
+		List<Produit> liste = new ArrayList<Produit>();
+		liste=produit.getAllProduit();
+		ModelAndView mav = new ModelAndView("product");
+		//mav.addObject("liste",liste);
+        return mav;
+	}
+	
 	
 	
 
