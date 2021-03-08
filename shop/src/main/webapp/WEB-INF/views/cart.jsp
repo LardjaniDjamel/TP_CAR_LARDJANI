@@ -35,7 +35,7 @@
 									<div class="col-sm-2 hidden-xs"><img src="../images/${prod.getImage()}" alt="..." class="img-responsive"/></div>
 									<div class="col-sm-10">
 										<h4 class="nomargin">${prod.getName()}</h4>
-										<p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+										<p> ${prod.getName()} ${prod.getCategorie()}  Core i5-4308U Dual-Core 2.8GHz 8GB 512GB SSD 13.3</p>
 									</div>
 								</div>
 							</td>
@@ -43,7 +43,7 @@
 							<td data-th="Quantity">
 								<input type="number" class="form-control text-center" value="${prod.getQuantite()}">
 							</td>
-							<td data-th="Subtotal" class="text-center">${prod. getPrice()}</td>
+							<td data-th="Subtotal" class="text-center">${prod. getPrice()} </td>
 							<td class="actions" data-th="">
 								<form action="/cart/dell/${prod.getIdProduit()}"> 
 									<button   type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
