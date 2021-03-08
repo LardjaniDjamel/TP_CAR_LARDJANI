@@ -33,7 +33,7 @@ public class ProduitController {
 	
 
 	
-	@GetMapping("/")
+	@GetMapping("/home")
 	@ResponseBody
 	public ModelAndView index(ModelMap pModel) {
 		List<Produit> liste = new ArrayList<Produit>();

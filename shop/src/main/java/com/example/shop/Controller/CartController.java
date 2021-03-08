@@ -2,6 +2,7 @@ package com.example.shop.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.shop.entities.LigneCommande;
 import com.example.shop.entities.Produit;
 import com.example.shop.repository.LigneCommandeRepo;
+import com.example.shop.service.Impl.LigneCommandeServiceImpl;
 import com.example.shop.service.Impl.ProduitServiceImpl;
 
 @Controller
@@ -22,6 +24,9 @@ public class CartController {
 	
 	@Autowired
 	ProduitServiceImpl produit  ;
+	
+	@Autowired
+	LigneCommandeServiceImpl ligneService ;
 	
 	
 	@Autowired
@@ -43,10 +48,13 @@ public class CartController {
 		lcommandeRepo.save(lc);
 		
 		//liste.add(p);
-		ModelAndView mav = new ModelAndView("redirect:/test");
+		ModelAndView mav = new ModelAndView("redirect:/cart");
 		//mav.addObject("liste", liste);
 		return mav;
 	}
+	
+
+
 	
 	@GetMapping(value = "/cart")
 	public ModelAndView AfficheCart( ) 
@@ -66,6 +74,35 @@ public class CartController {
 				
 		ModelAndView mav = new ModelAndView("cart");
 		mav.addObject("liste", liste);
+		return mav;
+	}
+	
+	@GetMapping(value = "/cart/dell/{id}")
+	public ModelAndView DellFromCart(@PathVariable int id) 
+	{	
+		List<LigneCommande> liste=new ArrayList<LigneCommande>();
+		liste=lcommandeRepo.findAll();
+	
+		for( LigneCommande c: liste) 
+		{
+			if(c.getId_produit()==id) {
+				lcommandeRepo.delete(c);
+
+			}			
+		}		
+		//liste.add(p);
+		ModelAndView mav = new ModelAndView("redirect:/cart");
+		//mav.addObject("liste", liste);
+		return mav;
+	}
+	
+	
+	@GetMapping(value = "/Continue")
+	public ModelAndView Continue() 
+	{	
+		
+		ModelAndView mav = new ModelAndView("redirect:/home");
+		//mav.addObject("liste", liste);
 		return mav;
 	}
 	

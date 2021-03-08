@@ -71,6 +71,30 @@ public class LigneCommande implements Serializable
 	public void setPrixTotal(float prixTotal) {
 		this.prixTotal = prixTotal;
 	}
+
+
+
+	public int getIdLigne() {
+		return idLigne;
+	}
+
+
+
+	public void setIdLigne(int idLigne) {
+		this.idLigne = idLigne;
+	}
+
+
+
+	public int getIc_client() {
+		return ic_client;
+	}
+
+
+
+	public void setIc_client(int ic_client) {
+		this.ic_client = ic_client;
+	}
 	
 	
 }
