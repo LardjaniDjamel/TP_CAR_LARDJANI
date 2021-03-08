@@ -107,6 +107,17 @@ public class CartController {
 	}
 	
 	
+	@GetMapping(value = "/checkout")
+	public ModelAndView checkout() 
+	{	
+		
+		ModelAndView mav = new ModelAndView("checkout");
+		//mav.addObject("liste", liste);
+		return mav;
+	}
+	
+	
+	
 	
 	
 	

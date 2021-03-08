@@ -13,6 +13,8 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <title>Cart</title>
 </head>
+
+
 <body>
 
 <div class="container">
@@ -39,11 +41,12 @@
 									</div>
 								</div>
 							</td>
-							<td data-th="Price">${prod. getPrice()} $</td>
+							<td data-th="Price" id="prix">${prod. getPrice()} $</td>
 							<td data-th="Quantity">
-								<input type="number" class="form-control text-center" value="${prod.getQuantite()}">
+								<input id="qte" type="number" class="form-control text-center" min="1" value="${prod.getQuantite()}">
 							</td>
-							<td data-th="Subtotal" class="text-center">${prod. getPrice()} </td>
+							<td data-th="Subtotal" class="text-center" id="tot" >${prod. getPrice()} $ </td>
+							
 							<td class="actions" data-th="">
 								<form action="/cart/dell/${prod.getIdProduit()}"> 
 									<button   type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
@@ -53,7 +56,6 @@
 					
 					
 					</c:forEach>
-							
 				
 					</tbody>
 					<tfoot>
@@ -63,10 +65,10 @@
 						<tr>
 							<td><a href="Continue" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
 							<td colspan="2" class="hidden-xs"></td>
-							<td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+							<td class="hidden-xs text-center"><strong></strong></td>
 							
 							
-							<td><a href="Checkout" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+							<td><a href="checkout" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
 				</table>
