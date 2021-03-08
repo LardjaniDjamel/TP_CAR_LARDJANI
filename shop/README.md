@@ -8,9 +8,10 @@
 
 # E-commerce site 
 
-The general goal of this lab is to set up an e-commerce site with spring-boot /JPA / Hibernate, Spring MVC, Maven.
-How to create Spring project .
-Manage entity persistence with JPA EntityManager /Crud DAO layer.
+The general goal of this lab is to  : 
+* set up an e-commerce site with spring-boot /JPA / Hibernate, Spring MVC, Maven.
+* How to create Spring project .
+* Manage entity persistence with JPA EntityManager /Crud DAO layer.
 
 
 
