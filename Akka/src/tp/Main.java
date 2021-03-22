@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -14,7 +15,7 @@ import akka.actor.Props;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		
 		ActorSystem system = ActorSystem.create("MySystem");
@@ -44,7 +45,7 @@ public class Main {
 		// Partie Fichier
 		
 		
-		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\lardjani\\Pictures\\Documents\\test.txt"));
+		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\lardjani\\Desktop\\M1S2\\CAR\\TP\\Akka\\lib\\test.txt"));
 		String line;
 		int i=0;
 		while ((line = in.readLine()) != null)
@@ -73,10 +74,13 @@ public class Main {
 
 		}
 		in.close();
+        TimeUnit time = TimeUnit.SECONDS; 
+        time.sleep(1); 
+
 		System.out.println(listWord.size());
 		
 		for (String i1 : listWord.keySet()) {
-		      System.out.println("key: " + i1 + " value: " + listWord.get(i1));
+		      System.out.println("Le mot : " + i1 + "   est répéter : " + listWord.get(i1) +" fois");
 		    }
 		
 		system.shutdown();
