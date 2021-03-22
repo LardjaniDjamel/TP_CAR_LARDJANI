@@ -3,6 +3,7 @@ package tp;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +39,8 @@ public static void main(String[] args) throws IOException, InterruptedException 
 				+ "			}\n"
 				+ "		}}"));
 		
-		
+		ArrayList<ActorRef> ListMapper= new ArrayList<ActorRef>();
+
 		ActorSystem system = ActorSystem.create("MySystem",configurtion1);
 		ActorSystem system1 = ActorSystem.create("MySystem1",configurtion2);
 		
@@ -66,7 +68,9 @@ public static void main(String[] args) throws IOException, InterruptedException 
 		greeter3=system1.actorOf(Props.create(GreetingActor.class,"mapper2",list), "greeter3");
 		greeter4=system.actorOf(Props.create(GreetingActor.class,"mapper3",list), "greeter4");
 		
-		
+		ListMapper.add(greeter2);
+		ListMapper.add(greeter3);
+		ListMapper.add(greeter4);
 		// Partie Fichier
 		
 		
@@ -75,27 +79,9 @@ public static void main(String[] args) throws IOException, InterruptedException 
 		int i=0;
 		while ((line = in.readLine()) != null)
 		{
-			if(i%3==0) 
-			{		
-				greeter2.tell(line, ActorRef.noSender());
-				i++;				
-			}
-			else if(i%3==1) 
-			{
-				greeter3.tell(line, ActorRef.noSender());
-				i++;
-				
-			}
-			else if(i%3==2) 
-			{
-				greeter4.tell(line, ActorRef.noSender());
-				i++;
 			
-			}
-			
-			
-			
-
+			ListMapper.get(i%(ListMapper.size())).tell(line, ActorRef.noSender());
+			i++;
 
 		}
 		in.close();

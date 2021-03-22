@@ -65,28 +65,9 @@ public class Main {
 		String line;
 		int i=0;
 		while ((line = in.readLine()) != null)
-		{
-			if(i%3==0) 
-			{		
-				greeter2.tell(line, ActorRef.noSender());
-				i++;				
-			}
-			else if(i%3==1) 
-			{
-				greeter3.tell(line, ActorRef.noSender());
-				i++;
-				
-			}
-			else if(i%3==2) 
-			{
-				greeter4.tell(line, ActorRef.noSender());
-				i++;
-			
-			}
-			
-			
-			
-
+		{			
+			ListMapper.get(i%(ListMapper.size())).tell(line, ActorRef.noSender());
+			i++;
 
 		}
 		in.close();
