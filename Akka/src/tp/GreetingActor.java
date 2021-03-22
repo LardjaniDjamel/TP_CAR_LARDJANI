@@ -11,13 +11,11 @@ public class GreetingActor extends UntypedActor{
 	
 	protected String name;
 	public Map<String, ActorRef> listReducer=new HashMap<String, ActorRef>();  
-	public HashMap<String, Integer> listWord ;
 
 	
 	public GreetingActor (String name,HashMap<String, ActorRef> l) {
 		this.name=name;
 		this.listReducer=l; 
-		//this.listWord=new HashMap<String, Integer>(); 
 	}
 
 	@Override
